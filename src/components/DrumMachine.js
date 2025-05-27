@@ -61,6 +61,8 @@ const audioClips = [
 
 const DrumMachine = () => {
   const [display, setDisplay] = useState("");
+  const [volume, setVolume] = useState(0.5); // Default volume set to 50%
+  const [isPowerOn, setIsPowerOn] = useState(true); // Power state of the drum machine
 
   // Called whenever a drum pad is triggered: update the display.
   const updateDisplay = (clipName) => {

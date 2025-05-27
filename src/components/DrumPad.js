@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 
 
-const DrumPad = ({ keyTrigger, clipId, url, updateDisplay}) => {
+const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
   //function to play the sound and update the display.
   const playSound = () => {
     const audioElement = document.getElementById(keyTrigger);
     if (audioElement) {
       audioElement.currentTime = 0; // Reset the audio to the start
+      audioElement.volume = volume; // Set the volume
       audioElement.play(); // Play the sound
       updateDisplay(clipId); // Update the display with the clip id
     }
@@ -24,7 +25,7 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay}) => {
     document.addEventListener('keydown', handleKeyDown);
     // Cleanup after unmount
     return () => document.removeEventListener('keydown', handleKeyDown);
-  });
+  }, []);
 
    return (
     <div 
