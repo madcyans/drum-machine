@@ -32,6 +32,7 @@
   gap: 12px;
 }
 
+/* Individual Drum Pad */
 .drum-pad {
   background: linear-gradient(135deg, #444, #222);
   color: white;
@@ -43,9 +44,16 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* Drum Pad Hover Effect */
 .drum-pad:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Click Effect */
+.drum-pad.active {
+  transform: scale(0.92);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
 /* Volume Slider */
