@@ -62,7 +62,6 @@ const audioClips = [
 const DrumMachine = () => {
   const [display, setDisplay] = useState("");
   const [volume, setVolume] = useState(0.5); // Default volume set to 50%
-  const [isPowerOn, setIsPowerOn] = useState(true); // Power state of the drum machine
 
   // Called whenever a drum pad is triggered: update the display.
   const updateDisplay = (clipName) => {
@@ -71,7 +70,22 @@ const DrumMachine = () => {
   
   return (
     <div id="drum-machine">
-      <div id="display">{display}</div>
+      <div id="display" className='display'>{display}</div>
+      <div className="controls">
+        {/* Volume Slider */}
+        <div className="volume-control">
+          <label htmlFor="volume">Volume:</label>
+          <input 
+            id="volume"
+            type="range" 
+            min="0" 
+            max="1" 
+            step="0.01" 
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+          />
+        </div>
+      </div>
       <div className="drum-pads-container">
         {audioClips.map((clip) => (
           <DrumPad
@@ -81,6 +95,7 @@ const DrumMachine = () => {
             clipName={clip.clipName}
             url={clip.url}
             updateDisplay={updateDisplay}
+            volume={volume}
           />
         ))}
       </div>
