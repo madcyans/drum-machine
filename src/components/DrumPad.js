@@ -7,7 +7,7 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
   const playSound = () => {
     const audio = new Audio(url); // Create a new Audio object
     audio.volume = volume;        // Apply volume control
-    audio.currentTime = 0.1;        // Start from the beginning
+    audio.currentTime = 0;        // Start from the beginning
     audio.play();                 // Play sound immediately
     updateDisplay(clipId);        // Update the UI
 
