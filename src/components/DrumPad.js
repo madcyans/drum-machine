@@ -4,13 +4,11 @@ import React, { useEffect } from 'react';
 const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
   //function to play the sound and update the display.
   const playSound = () => {
-    const audioElement = document.getElementById(keyTrigger);
-    if (audioElement) {
-      audioElement.currentTime = 0; // Reset the audio to the start
-      audioElement.volume = volume; // Set the volume
-      audioElement.play(); // Play the sound
-      updateDisplay(clipId); // Update the display with the clip id
-    }
+    const audio = new Audio(url); // Create a new Audio object
+    audio.volume = volume;        // Apply volume control
+    audio.currentTime = 0;        // Start from the beginning
+    audio.play();                 // Play sound immediately
+    updateDisplay(clipId);        // Update the UI
   }
 
   // Listen for keyboard events to trigger the correct pad
@@ -34,12 +32,6 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
       onClick={playSound}
     >
       {keyTrigger}
-      <audio 
-        className="clip" 
-        id={keyTrigger} 
-        src={url} 
-        preload="auto"
-      ></audio>
     </div>
   );
 };
