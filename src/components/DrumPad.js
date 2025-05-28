@@ -32,7 +32,7 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
 
    return (
     <div 
-      className="drum-pad" 
+      className={`drum-pad ${isActive ? "active" : ""}`} 
       id={clipId} 
       onClick={playSound}
     >
