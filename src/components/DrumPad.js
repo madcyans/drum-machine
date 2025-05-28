@@ -13,7 +13,7 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
 
     // Trigger active class
     setIsActive(true);
-    setTimeout(() => setIsActive(false), 500); // Remove class after animation
+    setTimeout(() => setIsActive(false), 150); // Remove class after animation
   }
 
   // Listen for keyboard events to trigger the correct pad
