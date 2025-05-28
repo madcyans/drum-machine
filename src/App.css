@@ -52,7 +52,7 @@
 
 /* Click Effect */
 .drum-pad.active {
-  transform: scale(1.2);
+  transform: scale(0.95);
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
