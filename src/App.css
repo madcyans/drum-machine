@@ -15,7 +15,7 @@
 /* Display Box */
 #display {
   background: #333;
-  color: #fff;
+  color: #b8afaf;
   padding: 10px 20px;
   font-size: 1.4rem;
   border-radius: 6px;
@@ -30,6 +30,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  justify-items: center; /* center buttons within each cell */
 }
 
 /* Individual Drum Pad */
@@ -37,11 +38,30 @@
   background: linear-gradient(135deg, #444, #222);
   color: white;
   font-size: 1.2rem;
-  padding: 15px;
+  padding: 20px 15px;
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
   transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Ensure a minimum width so they aren’t too narrow */
+  min-width: 100px;
+}
+
+/* Key letter styling */
+.pad-key {
+  font-size: 2rem; /* larger key letter */
+  font-weight: bold;
+}
+
+/* Clip name styling; the text below the key letter */
+.clip-name {
+  font-size: 0.9rem;
+  margin-top: 8px;
+  text-align: center;
 }
 
 /* Drum Pad Hover Effect */

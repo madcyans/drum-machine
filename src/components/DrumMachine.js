@@ -61,43 +61,59 @@ const audioClips = [
 
 const DrumMachine = () => {
   const [display, setDisplay] = useState("");
-  const [volume, setVolume] = useState(0.5); // Default volume set to 50%
+  const [volume, setVolume] = useState(0.5); // default volume: 50%
 
-  // Called whenever a drum pad is triggered: update the display.
+  // Called whenever a drum pad is triggered to update the display.
   const updateDisplay = (clipName) => {
     setDisplay(clipName);
   };
-  
+
   return (
-    <div id="drum-machine">
-      <div id="display" className='display'>{display}</div>
-      <div className="controls">
-        {/* Volume Slider */}
-        <div className="volume-control">
-          <label htmlFor="volume">Volume:</label>
-          <input 
-            id="volume"
-            type="range" 
-            min="0" 
-            max="1" 
-            step="0.01" 
-            value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
-          />
+    // Outer wrapper that fills and centers the screen.
+    <div
+      className="drum-machine-wrapper"
+      style={{
+        minHeight: "100vh",           // ensure the wrapper spans the entire viewport
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#1e1e2e",   // match the background of #drum-machine from your CSS
+        overflow: "hidden"
+      }}
+    >
+      {/* Drum Machine container: your app.css will apply layout/styling here */}
+      <div id="drum-machine">
+        <div id="display" className="display">
+          {display || "Press a key to play"}
         </div>
-      </div>
-      <div className="drum-pads-container">
-        {audioClips.map((clip) => (
-          <DrumPad
-            key={clip.clipId}
-            keyTrigger={clip.keyTrigger}
-            clipId={clip.clipId}
-            clipName={clip.clipName}
-            url={clip.url}
-            updateDisplay={updateDisplay}
-            volume={volume}
-          />
-        ))}
+        <div className="controls">
+          {/* Volume Slider */}
+          <div className="volume-control">
+            <label htmlFor="volume">Volume:</label>
+            <input
+              id="volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+            />
+          </div>
+        </div>
+        <div className="drum-pads-container">
+          {audioClips.map((clip) => (
+            <DrumPad
+              key={clip.clipId}
+              keyTrigger={clip.keyTrigger}
+              clipId={clip.clipId}
+              clipName={clip.clipName}
+              url={clip.url}
+              updateDisplay={updateDisplay}
+              volume={volume}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

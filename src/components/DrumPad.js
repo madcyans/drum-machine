@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 
-const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
+const DrumPad = ({ keyTrigger, clipId, clipName, url, updateDisplay, volume}) => {
   const [isActive, setIsActive] = useState(false);
-  //function to play the sound and update the display.
-  const playSound = () => {
-    const audio = new Audio(url); // Create a new Audio object
-    audio.volume = volume;        // Apply volume control
-    audio.currentTime = 0;        // Start from the beginning
-    audio.play();                 // Play sound immediately
-    updateDisplay(clipId);        // Update the UI
+   const audioRef = useRef(null);
 
-    // Trigger active class
-    setIsActive(true);
-    setTimeout(() => setIsActive(false), 150); // Remove class after animation
-  }
+   // Update the audio volume whenever volume prop changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  // Function to play the sound and update the display.
+  const playSound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0; // Restart the sound
+      audioRef.current.play();          // Play the sound
+    }
+    updateDisplay(clipName);             // Update display with clip name
+    setIsActive(true);                   // Apply active class for visual feedback
+    setTimeout(() => setIsActive(false), 150);
+  };
 
   // Listen for keyboard events to trigger the correct pad
   const handleKeyDown = (event) => {
@@ -36,7 +43,14 @@ const DrumPad = ({ keyTrigger, clipId, url, updateDisplay, volume}) => {
       id={clipId} 
       onClick={playSound}
     >
-      {keyTrigger}
+      <div className="pad-key">{keyTrigger}</div>
+      <div className="clip-name">{clipName}</div>
+      <audio
+        ref={audioRef}
+        className="clip"
+        src={url}
+        id={keyTrigger}
+      />
     </div>
   );
 };
